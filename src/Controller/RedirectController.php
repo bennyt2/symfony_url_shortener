@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Redirect;
 use App\Form\RedirectType;
 use App\Service\SlugBuilder;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +39,7 @@ class RedirectController extends AbstractController
             $em->persist($redirect);
             $em->flush();
 
-            return $this->redirectToRoute('redirect_view', ['redirect' => $redirect->getId()]);
+            return $this->redirectToRoute('redirect_view', ['redirect' => $redirect->getSlug()]);
         }
 
         return $this->render('redirect/index.html.twig', [
@@ -48,6 +49,7 @@ class RedirectController extends AbstractController
 
     /**
      * @Route("/view/{redirect}", name="redirect_view")
+     * @Entity("redirect", expr="repository.findOneBySlug(redirect)")
      *
      * @param Request  $request
      * @param Redirect $redirect
