@@ -8,7 +8,7 @@ class SlugBuilder
      * @param int $length
      * @return string
      */
-    public function createSlug($length = 6)
+    public function createSlug(?int $length = 6): string
     {
         // No vowels to prevent curse words.
         $chars = '123456789bcdfghjklmnpqrstvwxyz';
