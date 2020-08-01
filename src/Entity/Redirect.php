@@ -19,21 +19,21 @@ class Redirect
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected int $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=9, nullable=false)
      */
-    protected string $slug;
+    protected $slug;
 
     /**
      * @var string
      *
      * @ORM\Column(name="url", type="text", nullable=false)
      */
-    protected string $url;
+    protected $url;
 
     /**
      * @return int
