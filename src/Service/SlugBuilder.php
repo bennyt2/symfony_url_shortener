@@ -5,7 +5,7 @@ namespace App\Service;
 class SlugBuilder
 {
     /**
-     * @param int $length
+     * @param int|null $length
      * @return string
      */
     public function createSlug(?int $length = 6): string
