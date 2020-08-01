@@ -62,4 +62,18 @@ class RedirectController extends AbstractController
             'redirect' => $redirect,
         ]);
     }
+
+    /**
+     * @Route("/{redirect}", name="redirect_view")
+     * @Entity("redirect", expr="repository.findOneBySlug(redirect)")
+     *
+     * @param Request  $request
+     * @param Redirect $redirect
+     *
+     * @return Response
+     */
+    public function sendToRedirect(Request $request, Redirect $redirect)
+    {
+        return $this->redirect($redirect->getUrl());
+    }
 }
