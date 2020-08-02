@@ -30,6 +30,7 @@ class Redirect
      *      max = 9,
      *      allowEmptyString = true
      * )
+     * @App\Validator\Constraints\UniqueSlug
      *
      * @ORM\Column(name="slug", type="string", length=9, nullable=false)
      */
