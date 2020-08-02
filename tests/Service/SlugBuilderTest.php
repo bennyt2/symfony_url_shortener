@@ -3,10 +3,19 @@
 namespace App\Tests\Service;
 
 use App\Service\SlugBuilder;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class SlugBuilderTest extends TestCase
+class SlugBuilderTest extends KernelTestCase
 {
+    /** @var SlugBuilder */
+    protected $slugBuilder;
+
+    protected function setUp(): void
+    {
+        self::bootKernel();
+        $this->slugBuilder = self::$container->get('App\Service\SlugBuilder');
+    }
+
     /**
      * @param int|null $lengthArg
      * @param int      $expectedLength
@@ -15,12 +24,10 @@ class SlugBuilderTest extends TestCase
      */
     public function testCreateSlug(?int $lengthArg, int $expectedLength)
     {
-        $slugBuilder = new SlugBuilder();
-
         if ($lengthArg === null) {
-            $slug = $slugBuilder->createSlug();
+            $slug = $this->slugBuilder->createSlug();
         } else {
-            $slug = $slugBuilder->createSlug($lengthArg);
+            $slug = $this->slugBuilder->createSlug($lengthArg);
         }
         $this->assertEquals($expectedLength, strlen($slug));
     }
