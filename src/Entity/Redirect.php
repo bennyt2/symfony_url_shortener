@@ -25,6 +25,12 @@ class Redirect
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 9,
+     *      allowEmptyString = true
+     * )
+     *
      * @ORM\Column(name="slug", type="string", length=9, nullable=false)
      */
     protected $slug;
@@ -55,9 +61,11 @@ class Redirect
     }
 
     /**
-     * @return string
+     * string|null as it can be empty if the form is submitted without a slug
+     *
+     * @return string|null
      */
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }

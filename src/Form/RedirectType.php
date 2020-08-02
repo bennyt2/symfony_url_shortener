@@ -14,7 +14,13 @@ class RedirectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', TextType::class)
+            ->add('url', TextType::class, [
+                'help' => 'Please include URL Protocol (e.g. http://, https://).',
+            ])
+            ->add('slug', TextType::class, [
+                'help' => 'Can be 5-9 characters long. Leave blank to auto-generate a slug.',
+                'required' => false,
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Create Redirect',
                 'attr' => [

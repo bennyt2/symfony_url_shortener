@@ -33,7 +33,9 @@ class RedirectController extends AbstractController
             $redirect = $form->getData();
 
             // Generate the slug.
-            $redirect->setSlug($slugBuilder->createSlug());
+            if (!$redirect->getSlug()) {
+                $redirect->setSlug($slugBuilder->createSlug());
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($redirect);
