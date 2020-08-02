@@ -3,7 +3,7 @@
 namespace App\Validator\Constraints;
 
 use App\Entity\Redirect;
-use Doctrine\ORM\EntityManager;
+use App\Repository\RedirectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -11,16 +11,16 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class UniqueSlugValidator extends ConstraintValidator
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    /** @var RedirectRepository */
+    protected $repo;
 
     /**
      * UniqueSlugValidator constructor.
-     * @param EntityManagerInterface $em
+     * @param RedirectRepository $repo
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(RedirectRepository $repo)
     {
-        $this->em = $em;
+        $this->repo = $repo;
     }
 
     public function validate($value, Constraint $constraint)
@@ -33,7 +33,7 @@ class UniqueSlugValidator extends ConstraintValidator
             return;
         }
 
-        $slug = $this->em->getRepository(Redirect::class)->findOneBySlug($value);
+        $slug = $this->repo->findOneBySlug($value);
 
         if ($slug) {
             $this->context->buildViolation($constraint->message)

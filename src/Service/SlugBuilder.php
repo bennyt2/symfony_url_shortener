@@ -3,20 +3,21 @@
 namespace App\Service;
 
 use App\Entity\Redirect;
+use App\Repository\RedirectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class SlugBuilder
 {
-    /** @var EntityManagerInterface */
-    protected $em;
+    /** @var RedirectRepository */
+    protected $repo;
 
     /**
      * SlugBuilder constructor.
-     * @param EntityManagerInterface $em
+     * @param RedirectRepository $repo
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(RedirectRepository $repo)
     {
-        $this->em = $em;
+        $this->repo = $repo;
     }
 
     /**
@@ -25,8 +26,6 @@ class SlugBuilder
      */
     public function createSlug(?int $length = 6): string
     {
-        $repo = $this->em->getRepository(Redirect::class);
-
         do {
             // No vowels to prevent curse words.
             $chars = '123456789bcdfghjklmnpqrstvwxyz';
@@ -34,7 +33,7 @@ class SlugBuilder
             for ($i = 0; $i < $length; $i++) {
                 $slug .= $chars[rand(0, strlen($chars)-1)];
             }
-        } while ($repo->findOneBySlug($slug));
+        } while ($this->repo->findOneBySlug($slug));
 
         return $slug;
     }

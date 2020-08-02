@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Redirect
  *
  * @ORM\Table(name="redirect", indexes={@ORM\Index(name="slug_idx", columns={"slug"})})
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\RedirectRepository")
  */
 class Redirect
 {
