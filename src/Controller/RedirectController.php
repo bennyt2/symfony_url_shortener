@@ -64,7 +64,7 @@ class RedirectController extends AbstractController
     }
 
     /**
-     * @Route("/{redirect}", name="redirect_view")
+     * @Route("/{redirect}", name="redirect_send")
      * @Entity("redirect", expr="repository.findOneBySlug(redirect)")
      *
      * @param Request  $request
