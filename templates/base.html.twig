@@ -10,7 +10,11 @@
     </head>
     <body>
         <div class="container">
-            {% block page_title %}<h1>Awesome URL Shortener</h1>{% endblock %}
+            {% block page_title %}
+                <h1>
+                    <a href="/">Awesome URL Shortener</a>
+                </h1>
+            {% endblock %}
 
             {% block body %}{% endblock %}
         </div>
